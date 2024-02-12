@@ -15,30 +15,54 @@
         display: grid;
         place-items: center;
       }
+
+      .text-green{
+        color: green;
+      }
+
+      .text-red{
+        color: red;
+      }
+
     </style>
   </head>
   <body>
     <div id="app">
-      <form action="">
+
+    <!-- v-model sample and basic reactivity -->
+      <!-- <form action="">
         <input type="text" v-model="greeting" />
       </form>
 
       <p>{{greeting}} ({{greeting.length}})</p>
-    </div>
+    </div> -->
+
+
+    <!-- Working with buttons -->
+
+    <button :class="isActive ? 'text-green' : 'text-red'" @click="toggle">Click Me</button>
+    
 
     <script>
       Vue.createApp({
         data() {
           return {
             greeting: "Hello World!",
+            isActive: false
           };
         },
 
-        mounted() {
-          setTimeout(() => {
-            this.greeting = "Hello, vue!";
-          }, 3000);
+        methods:{
+            toggle() {
+                this.isActive = !this.isActive;
+            }
         },
+
+        // mounted() {
+        //   setTimeout(() => {
+        //     this.greeting = "Hello, vue!";
+        //   }, 3000);
+        // },
       }).mount("#app");
     </script>
   </body>
