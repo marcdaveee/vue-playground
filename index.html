@@ -37,33 +37,11 @@
       <p>{{greeting}} ({{greeting.length}})</p>
     </div> -->
 
-
     <!-- Working with buttons -->
 
     <button :class="isActive ? 'text-green' : 'text-red'" @click="toggle">Click Me</button>
     
-
-    <script>
-      Vue.createApp({
-        data() {
-          return {
-            greeting: "Hello World!",
-            isActive: false
-          };
-        },
-
-        methods:{
-            toggle() {
-                this.isActive = !this.isActive;
-            }
-        },
-
-        // mounted() {
-        //   setTimeout(() => {
-        //     this.greeting = "Hello, vue!";
-        //   }, 3000);
-        // },
-      }).mount("#app");
-    </script>
+    <script src="app.js"></script>
+    
   </body>
 </html>
