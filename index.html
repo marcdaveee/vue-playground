@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vue Playground</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+
+      *{
+        margin: 0;
+        padding: 0;
+      }
+
+
       html,
       body {
         height: 100%;
@@ -24,6 +32,55 @@
         color: red;
       }
 
+      .grid{
+        height: 500px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        justify-content: center;
+        align-items: flex-start;
+        grid-gap: 20px;
+      }
+
+      .flex{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;        
+      }
+
+      .flex-just-start{
+        justify-content: space-around;
+        align-items: flex-start;
+      }
+
+      .flex-js-sb{
+        justify-content: space-between;
+      }
+
+      .card{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;        
+        border-radius: 3px;
+        background-color: #fff;
+        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+        padding: 20px 10px;
+      }
+
+      .card i{
+        align-self: center;
+      }
+
+      .m-1{
+        margin: 10px 0;
+      }
+
+      .m-2{
+        margin: 20px 0;
+      }
+
     </style>
   </head>
   <body>
@@ -39,7 +96,56 @@
 
     <!-- Working with buttons -->
 
-    <button :class="isActive ? 'text-green' : 'text-red'" @click="toggle">Click Me</button>
+    <!-- <p>Click count: {{count}}</p>
+
+    <button :class="isActive ? 'text-green' : 'text-red'" @click="toggle">Increment</button>
+
+    <button :class="isActive ? 'text-green' : 'text-red'" @click="decrement">Decrement</button> -->
+
+
+    <!-- Using v-for -->
+
+    <div class="flex flex-js-sb m-2">
+      <h1 class="m-2">Book List</h1>      
+      <button v-if="!isFiltered" @click="showFave()">Show Favorites</button>
+      <button v-if="isFiltered" @click="showFave()">All Books</button>
+    </div>
+    
+
+
+    <ul class="grid" v-if="!isFiltered">            
+      <li class="card" v-for="book in books" >
+        <i class="fa-solid fa-book fa-4x m-2"></i>
+        <div class="flex flex-just-start">
+          <div>
+            <h3>{{book.title}} - {{book.year}}</h3>
+            <p>{{book.author}}</p>
+          </div>
+          <div>
+            <i :class="book.isFavourite ? 'fa-solid fa-star' : 'fa-regular fa-star'" @click="setFavourite(book)"></i>
+          </div>
+                    
+        </div>
+        
+      </li>
+    </ul>
+
+    <ul class="grid" v-if="isFiltered">            
+      <li class="card" v-for="book in filteredBooks" >
+        <i class="fa-solid fa-book fa-4x m-2"></i>
+        <div class="flex flex-just-start">
+          <div>
+            <h3>{{book.title}} - {{book.year}}</h3>
+            <p>{{book.author}}</p>
+          </div>
+          <div>
+            <i :class="book.isFavourite ? 'fa-solid fa-star' : 'fa-regular fa-star'" @click="setFavourite(book)"></i>
+          </div>
+                    
+        </div>
+        
+      </li>
+    </ul>
     
     <script src="app.js"></script>
     
