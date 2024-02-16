@@ -54,6 +54,7 @@ const app = Vue.createApp({
   },
 
   computed: {
+    //return all books set as favourite
     filteredBooks() {
       return this.books.filter((book) => book.isFavourite);
     },
