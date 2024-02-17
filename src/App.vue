@@ -1,8 +1,25 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+  <!-- What was learned?
+    Passing props is passing data from parent to child components
+    - inside the parent component, register the its child components
+    - inside the child component, props are registered in the props: property
+    
+    Emitting custom events is passing events from child to parent
+    - create custom emits in the methods of the child component
+    - syntax: this.$emits("nameOftheEvent")
+    - the parent component listens to the the child component emit events
+    - to capture the emit, the parent component will use the following syntax: @Close, @nameOfTheEmmitedEvent
+
+
+-->
+
   <h1>{{ title }}</h1>
-  <Modal :header="header" :text="text" />
+  <div v-if="isModalShown">
+    <Modal :header="header" :text="text" theme="dark" @close="toggleModal" />
+  </div>
+  <div>
+    <button @click="toggleModal">Open Modal</button>
+  </div>
 </template>
 
 <script>
@@ -21,7 +38,14 @@ export default {
       title: "My First Vue App",
       header: "Sign up for Giveaway!",
       text: "Grap your coupons for discounts!",
+      isModalShown: false,
     };
+  },
+
+  methods: {
+    toggleModal() {
+      this.isModalShown = !this.isModalShown;
+    },
   },
 };
 </script>
